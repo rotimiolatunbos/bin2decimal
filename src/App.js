@@ -46,7 +46,11 @@ export default function App() {
         if (prevState.decimal) {
           newState.decimal = '';
         }
-        
+
+        if (prevState.errorMessage) {
+          newState.errorMessage = null;
+        }
+
         return newState;
       }
 
