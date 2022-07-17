@@ -36,6 +36,23 @@ export default function App() {
     }
   };
 
+  const handleBackspace = () =>
+    setState((prevState) => {
+      const newState = { ...prevState };
+
+      if (prevState.binary) {
+        newState.binary = prevState.binary.slice(0, -1);
+
+        if (prevState.decimal) {
+          newState.decimal = '';
+        }
+        
+        return newState;
+      }
+
+      return prevState;
+    });
+
   const clearInput = () =>
     setState({
       decimal: '',
@@ -48,6 +65,7 @@ export default function App() {
       if (prevState.binary) {
         return {
           ...prevState,
+          errorMessage: null,
           decimal: parseInt(prevState.binary, 2),
         };
       }
@@ -67,6 +85,8 @@ export default function App() {
           value={binary}
         />
       </label>
+      <button onClick={handleBackspace}>backspace</button>
+      <br />
       <span>{errorMessage}</span>
       <br />
       <button onClick={clearInput}>clear input</button>
